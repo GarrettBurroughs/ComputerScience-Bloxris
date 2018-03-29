@@ -22,8 +22,6 @@ public class Bloxris extends PApplet {
  *
  */
 
-
-
 ArrayList<GameObject> gameObjects = new ArrayList();
 
 public void setup(){
@@ -46,7 +44,7 @@ class Block implements GameObject{
   int blockDimensions = 10;
   int x;
   int y;
-  
+
   @Override
   public void initialize(){
       x = height/2;
@@ -63,15 +61,6 @@ class Block implements GameObject{
     rectMode(CENTER);
     rect(x, y, blockDimensions, blockDimensions);
   }
-}
-/**
-  * The object interface outlines the basic activity of an object in the bloxris game,
-  * All objects have to be rendered to show up on screen in the </code>draw<code>
-  */
-interface GameObject{
-  public void initialize();
-  public void update();
-  public void render();
 }
 interface Screen{
   public void update();

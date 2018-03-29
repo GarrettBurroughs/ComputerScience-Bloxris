@@ -4,8 +4,6 @@ import java.util.ArrayList;
  *
  */
 
-
-
 ArrayList<GameObject> gameObjects = new ArrayList();
 
 void setup(){

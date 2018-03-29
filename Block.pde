@@ -3,7 +3,7 @@ class Block implements GameObject{
   int blockDimensions = 10;
   int x;
   int y;
-  
+
   @Override
   public void initialize(){
       x = height/2;
