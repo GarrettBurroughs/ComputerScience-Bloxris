@@ -4,7 +4,7 @@ import java.util.ArrayList;
  *
  */
 
-ArrayList<GameObject> gameObjects = new ArrayList();
+ArrayList<Screen> screens = new ArrayList();
 
 void setup(){
   size(720, 480);
