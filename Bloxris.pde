@@ -4,20 +4,38 @@ import java.util.ArrayList;
  *
  */
 
-ArrayList<Screen> screens = new ArrayList();
+static ArrayList<Screen> screens = new ArrayList();
+Screen currentScreen;
+// A file to store information about the game
+JSONObject gameData;
+int tickRate;
+public PFont f;
 
 void setup(){
+  // Set global variables
+  gameData = loadJSONObject("gameData.json");
+  tickRate = gameData.getInt("tickRate");
+
+  f = loadFont("bloxrisFont2.vlw");
+
+  // Basic Processing enviornment setup
   size(720, 480);
-  gameObjects.add(new Block());
   background(0);
-  for(GameObject o : gameObjects){
-    o.initialize();
+  frameRate(tickRate);
+
+  screens.add(new StartScreen()); // Screen 1
+
+  // Set up screens
+  currentScreen = screens.get(0);
+  for(Screen s : screens){
+    for(GameObject o : s.getObjects()){
+      o.initialize();
+    }
   }
 }
 
 void draw(){
-  for(GameObject o : gameObjects){
-    o.update();
-    o.render();
-  }
+  currentScreen.update();
+  currentScreen.display();
+  currentScreen.renderObjects();
 }

@@ -4,10 +4,15 @@ class Block implements GameObject{
   int x;
   int y;
 
+  public Block(int x, int y){
+    this.x = y;
+    this.y = y;
+  }
+
   @Override
   public void initialize(){
-      x = height/2;
-      y = width/2;
+      // x = height/2;
+      // y = width/2;
   }
 
   @Override
