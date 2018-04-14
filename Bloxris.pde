@@ -39,3 +39,11 @@ void draw(){
   currentScreen.display();
   currentScreen.renderObjects();
 }
+
+void mousePressed()
+{
+  for(GameObject o : currentScreen.getObjects())
+  {
+     o.click();
+   }
+}

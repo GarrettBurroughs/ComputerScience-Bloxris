@@ -19,6 +19,11 @@ class Block implements GameObject{
   public void update(){
 
   }
+  
+  @Override
+  public void click(){
+
+  }
 
   @Override
   public void render(){
