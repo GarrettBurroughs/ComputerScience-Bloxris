@@ -2,7 +2,7 @@ class StartScreen extends Screen{
 
   public StartScreen(){
     addObjects(
-      new screenSwitchButton(width/2, height/2, "Start", currentScreen),
+      new screenSwitchButton(width/2, height/2, "Start", new GameplayScreen()),
       new screenSwitchButton(width/2, height/2 + 60, "Statistics", currentScreen),
       new screenSwitchButton(width/2, height/2 + 120, "Options", currentScreen),
       new screenSwitchButton(width/2, height/2 + 180, "Quit", currentScreen)
@@ -11,7 +11,7 @@ class StartScreen extends Screen{
 
   @Override
   public void screenUpdate(){
-    
+
   }
 
   @Override
@@ -29,7 +29,7 @@ class StartScreen extends Screen{
     fill(255);
     text("Bloxris", width/2, height/4);
     //Button testButton = new Button(width/2, height/2, "Options");
-    
+
     //testButton.render();
   }
 

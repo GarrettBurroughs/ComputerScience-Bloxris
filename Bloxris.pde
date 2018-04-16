@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 
 static ArrayList<Screen> screens = new ArrayList();
-Screen currentScreen;
+static Screen currentScreen;
 // A file to store information about the game
 JSONObject gameData;
 int tickRate;
@@ -39,6 +39,7 @@ void draw(){
   currentScreen.display();
   currentScreen.renderObjects();
 }
+
 
 void mousePressed()
 {
