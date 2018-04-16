@@ -99,31 +99,6 @@ class Block implements GameObject{
     rect(x, y, blockDimensions, blockDimensions);
   }
 }
-public class Bloxrominoe implements GameObject{
-  private void moveDown(){
-    // Perform a check
-  }
-
-  private void move(int direction){
-
-  }
-  public void initialize(){
-
-  }
-
-  public void update(){
-
-  }
-
-  public void click(){
-
-  }
-
-  public void render(){
-
-  }
-
-}
 public abstract class Button implements GameObject
 {
    String text;
