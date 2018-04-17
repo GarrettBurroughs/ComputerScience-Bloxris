@@ -22,4 +22,8 @@ public class TestScreen extends Screen{
   public int isDone(){
     return -1;
   }
+  @Override
+  public void pressed(char c){
+
+  }
 }

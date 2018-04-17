@@ -48,3 +48,8 @@ void mousePressed()
      o.click();
    }
 }
+
+void keyPressed(){
+  currentScreen.pressed(key);
+  // println(key);
+}

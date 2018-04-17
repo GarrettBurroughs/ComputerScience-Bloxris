@@ -1,5 +1,5 @@
 {
-  "tickRate" : 60,
+  "tickRate" : 2,
   "highscore" : 0,
   "scores" : []
 }

@@ -66,6 +66,11 @@ public void mousePressed()
      o.click();
    }
 }
+
+public void keyPressed(){
+  currentScreen.pressed(key);
+  // println(key);
+}
 class Block implements GameObject{
 
   int blockDimensions = 10;
@@ -166,12 +171,25 @@ public class GameplayScreen extends Screen{
   int[][] grid = new int[20][10];
   private final float blockX = (3 * width / 5) / 10;
   private final float blockY = height / 20;
+  private Bloxrominoe b;
+
   public GameplayScreen(){
+    b =  Bloxrominoe.randomBloxrominoe(3, 3);
   }
 
   @Override
   public void screenUpdate(){
+    for(int i = 0; i < 5; i++){
+      for(int j = 0; j < 5; j++){
+        // Make sure it is in bounds
+        try{
+          grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+        }finally{
 
+        }
+      }
+    }
+    b.moveDown(grid);
   }
 
   @Override
@@ -192,10 +210,11 @@ public class GameplayScreen extends Screen{
       for(int j = 0; j < grid[i].length; j++){
         if(grid[i][j] == 1){
           fill(255);
+          stroke(0);
         }else{
           fill(0);
+          stroke(255);
         }
-        // TODO: figure out block scaling
         rect((width / 5 + j * blockX), (i * blockY), (blockX), (blockY));
       }
     }
@@ -204,6 +223,17 @@ public class GameplayScreen extends Screen{
   @Override
   public int isDone(){
     return -1;
+  }
+
+  @Override
+  public void pressed(char c){
+    if(c == 'r'){
+      b.rotatePiece();
+    }
+    if(c == 'n'){
+      b = Bloxrominoe.randomBloxrominoe(3, 3);
+    }
+    println(c);
   }
 }
 class StartScreen extends Screen{
@@ -245,6 +275,11 @@ class StartScreen extends Screen{
   public int isDone(){
     return -1;
   }
+
+  @Override
+  public void pressed(char c){
+
+  }
 }
 public class TestScreen extends Screen{
 
@@ -269,6 +304,10 @@ public class TestScreen extends Screen{
   @Override
   public int isDone(){
     return -1;
+  }
+  @Override
+  public void pressed(char c){
+
   }
 }
 public static abstract class Utils

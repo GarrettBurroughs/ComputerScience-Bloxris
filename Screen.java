@@ -7,7 +7,7 @@ public abstract class Screen{
   public abstract void display();
 
   public Screen(){
-    //Bloxris.screens.add(this);
+    // Bloxris.screens.add(this);
   }
 
   public void update(){
@@ -44,4 +44,6 @@ public abstract class Screen{
    */
   public abstract int isDone();
 
+
+  public abstract void pressed(char c);
 }
