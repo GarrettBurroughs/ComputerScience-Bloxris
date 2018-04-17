@@ -18,25 +18,25 @@ public class Bloxrominoe implements GameObject{
 
   private static final int[][] SSchematic = {
     {0, 0, 0, 0, 0},
-    {0, 0, 1, 1, 0},
-    {0, 0, 1, 0, 0},
-    {0, 1, 1, 0, 0},
+    {0, 0, 0, 0, 0},
+    {0, 0, 5, 5, 0},
+    {0, 5, 5, 0, 0},
     {0, 0, 0, 0, 0}
   };
 
   private static final int[][] ZSchematic = {
     {0, 0, 0, 0, 0},
-    {0, 1, 1, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 0, 1, 1, 0},
+    {0, 0, 0, 0, 0},
+    {0, 7, 7, 0, 0},
+    {0, 0, 7, 7, 0},
     {0, 0, 0, 0, 0}
   };
 
   private static final int[][] TSchematic = {
     {0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 1, 1, 1, 0},
+    {0, 0, 6, 0, 0},
+    {0, 6, 6, 6, 0},
     {0, 0, 0, 0, 0}
   };
 
@@ -51,17 +51,17 @@ public class Bloxrominoe implements GameObject{
 
   private static final int[][] MirroredLSchematic = {
     {0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 0, 1, 1, 0},
+    {0, 0, 3, 0, 0},
+    {0, 0, 3, 0, 0},
+    {0, 0, 3, 3, 0},
     {0, 0, 0, 0, 0}
   };
 
   private static final int[][] LSchematic = {
     {0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 1, 1, 0, 0},
+    {0, 0, 2, 0, 0},
+    {0, 0, 2, 0, 0},
+    {0, 2, 2, 0, 0},
     {0, 0, 0, 0, 0}
   };
 
@@ -69,8 +69,8 @@ public class Bloxrominoe implements GameObject{
     {0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0},
-    {0, 0, 1, 1, 0},
-    {0, 0, 1, 1, 0}
+    {0, 0, 4, 4, 0},
+    {0, 0, 4, 4, 0}
   };
 
   public enum Shape{
@@ -159,7 +159,7 @@ public class Bloxrominoe implements GameObject{
     boolean canMoveDown = true;
     for(int i = 0; i < 5; i++){
       try{
-        System.out.println(getLowestRow()[i]);
+        //System.out.println(getLowestRow()[i]);
         if(shape[getLowestRow()][i] == 1 && grid[ypos + 6][xpos + i] == 1){
 
           canMoveDown = false;

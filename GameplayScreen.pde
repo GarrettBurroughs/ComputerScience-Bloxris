@@ -1,6 +1,7 @@
 public class GameplayScreen extends Screen{
 
   int[][] grid = new int[20][10];
+  color[] colors = {color(0),color(0,240,240), color(0,0,240), color(240,160,0), color(240,240,0), color(0,240,0), color(160,0,240), color(240,0,0)};
   private final float blockX = (3 * width / 5) / 10;
   private final float blockY = height / 20;
   private Bloxrominoe b;
@@ -18,7 +19,7 @@ public class GameplayScreen extends Screen{
       for(int j = 0; j < 5; j++){
         // Make sure it is in bounds
         try{
-          grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+
         }finally{
 
         }
@@ -42,14 +43,10 @@ public class GameplayScreen extends Screen{
     fill(255);
     stroke(255);
     for(int i = 0; i < grid.length; i++){
-      for(int j = 0; j < grid[i].length; j++){
-        if(grid[i][j] == 1){
-          fill(255);
+      for(int j = 0; j < grid[i].length; j++)
+      {
+          fill(colors[grid[i][j]]);
           stroke(0);
-        }else{
-          fill(0);
-          stroke(0);
-        }
         rect((width / 5 + j * blockX), (i * blockY), (blockX), (blockY));
       }
     }
