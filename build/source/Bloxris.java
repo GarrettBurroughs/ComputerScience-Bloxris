@@ -271,6 +271,10 @@ public class TestScreen extends Screen{
     return -1;
   }
 }
+public static abstract class Utils
+{
+  
+}
 public class screenSwitchButton extends Button
 {
   Screen targetScreen;
