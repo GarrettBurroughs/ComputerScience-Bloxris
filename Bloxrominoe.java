@@ -150,10 +150,33 @@ public class Bloxrominoe implements GameObject{
             tempShape[j][4-i] = shape[i][j];
         }
     }
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            if(j + getLowestRow(tempShape) - 4 > 0)
+            {
+              shape[i][j] = tempShape[i][j + getLowestRow(tempShape) - 4]; 
+            }
+            else
+            {
+              shape[i][j] = 0;
+            }
+        }
+    }
     this.shape = tempShape;
   }
 
-
+  private int getLowestRow(int[][] tempShape){
+    for(int i = tempShape.length - 1; i > 0; i--){
+      for(int j = 0; j < tempShape.length; j++){
+        if(tempShape[i][j] == 1){
+          return i;
+        }
+      }
+    }
+    return 0;
+  }
 
   public void moveDown(int[][] grid){
     boolean canMoveDown = true;
