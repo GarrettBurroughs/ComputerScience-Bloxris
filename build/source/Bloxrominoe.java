@@ -18,26 +18,26 @@ public class Bloxrominoe implements GameObject{
 
   private static final int[][] SSchematic = {
     {0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0},
     {0, 0, 1, 1, 0},
     {0, 0, 1, 0, 0},
-    {0, 1, 1, 0, 0},
-    {0, 0, 0, 0, 0}
+    {0, 1, 1, 0, 0}
   };
 
   private static final int[][] ZSchematic = {
     {0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0},
     {0, 1, 1, 0, 0},
     {0, 0, 1, 0, 0},
-    {0, 0, 1, 1, 0},
-    {0, 0, 0, 0, 0}
+    {0, 0, 1, 1, 0}
   };
 
   private static final int[][] TSchematic = {
     {0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0},
     {0, 0, 1, 0, 0},
-    {0, 1, 1, 1, 0},
-    {0, 0, 0, 0, 0}
+    {0, 1, 1, 1, 0}
   };
 
   private static final int[][] LineSchematic = {
@@ -51,18 +51,18 @@ public class Bloxrominoe implements GameObject{
 
   private static final int[][] MirroredLSchematic = {
     {0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0},
     {0, 0, 1, 0, 0},
     {0, 0, 1, 0, 0},
-    {0, 0, 1, 1, 0},
-    {0, 0, 0, 0, 0}
+    {0, 0, 1, 1, 0}
   };
 
   private static final int[][] LSchematic = {
     {0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0},
     {0, 0, 1, 0, 0},
     {0, 0, 1, 0, 0},
-    {0, 1, 1, 0, 0},
-    {0, 0, 0, 0, 0}
+    {0, 1, 1, 0, 0}
   };
 
   private static final int[][] SquareSchematic = {
@@ -151,17 +151,30 @@ public class Bloxrominoe implements GameObject{
         }
     }
     this.shape = tempShape;
+    /*
+    if(getLowestRow() != 0){
+      int[] tempRow = int[5];
+      for(int i = 0; i < 5 - getLowestRow(); i++){
+
+      }
+      // make bottom row top row
+      // Repeat untill bottom row is top getLowestRow
+      // If lowest row = 4, 1 time, if lowest row = 3,2times
+      // 5 - Lowest Row
+    }*/
   }
 
 
 
   public void moveDown(int[][] grid){
     boolean canMoveDown = true;
-    for(int i = 0; i < getLowestRow().length; i++){
+    for(int i = 0; i < 5; i++){
       try{
-        System.out.println(getLowestRow()[i]);
-        if(getLowestRow()[i] == 1 && grid[ypos + 6][xpos + i] == 1){
-
+        System.out.println(getLowestRow());
+        System.out.println("Grid Value: " + grid[ypos + i + 2][xpos + i]);
+        System.out.println("Y value: " + (ypos + i + 2));
+        System.out.println("X Value: " + (xpos + i));
+        if(shape[getLowestRow()][i] >= 1 && grid[ypos + getLowestRow() + 1][xpos + i] >= 1){
           canMoveDown = false;
         }
       } catch(NullPointerException e) {
@@ -181,20 +194,20 @@ public class Bloxrominoe implements GameObject{
     // Stop
   }
 
-  private void move(int direction){
-
+  public void move(int direction){
+    xpos += direction;
   }
 
 
-  private int[] getLowestRow(){
+  private int getLowestRow(){
     for(int i = shape.length - 1; i > 0; i--){
       for(int j = 0; j < shape.length; j++){
         if(shape[i][j] == 1){
-          return shape[i];
+          return i;
         }
       }
     }
-    return new int[0];
+    return 0;
   }
 
   public void initialize(){

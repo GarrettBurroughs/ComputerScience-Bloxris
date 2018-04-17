@@ -26,20 +26,18 @@ static ArrayList<Screen> screens = new ArrayList();
 static Screen currentScreen;
 // A file to store information about the game
 JSONObject gameData;
-int tickRate;
 public PFont f;
 
 public void setup(){
   // Set global variables
   gameData = loadJSONObject("gameData.json");
-  tickRate = gameData.getInt("tickRate");
 
   f = loadFont("bloxrisFont2.vlw");
 
   // Basic Processing enviornment setup
   
   background(0);
-  frameRate(tickRate);
+  frameRate(gameData.getInt("frameRate"));
 
   screens.add(new StartScreen()); // Screen 1
 
@@ -185,10 +183,16 @@ public class GameplayScreen extends Screen{
     for(int i = 0; i < 5; i++){
       for(int j = 0; j < 5; j++){
         // Make sure it is in bounds
-        try{
+        if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+          if(i > b.shape.length){
+            if(b.shape[i + 1][j] == 1){
+              grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+            }
+          }
           grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-        }finally{
-
+        }else if(i > 0  && j > 0 && j < b.shape[i].length - 1){
+          if(b.xpos + j > 0 && b.xpos + j < 20 && b.shape[i - 1][j + 1] == 1 || b.shape[i - 1][j - 1] == 1){
+          }
         }
       }
     }
@@ -216,7 +220,7 @@ public class GameplayScreen extends Screen{
           stroke(0);
         }else{
           fill(0);
-          stroke(0);
+          stroke(255);
         }
         rect((width / 5 + j * blockX), (i * blockY), (blockX), (blockY));
       }
@@ -236,6 +240,13 @@ public class GameplayScreen extends Screen{
     if(c == 'n'){
       b = Bloxrominoe.randomBloxrominoe(3, 3);
     }
+    if(c == 'a'){
+      b.move(1);
+    }
+    if(c == 'd'){
+      b.move(-1);
+    }
+
     println(c);
   }
 }
