@@ -58,6 +58,19 @@ public class Bloxrominoe implements GameObject{
   private Bloxrominoe(int[][] shape){
     this.shape = shape;
   }
+  
+  public int[][] rotatePiece() 
+  {
+    int[][] tempShape = new int[4][4];
+    for (int i = 0; i < 4; i++) 
+    {
+        for (int j = 0; j < 4; j++) 
+        {
+            tempShape[j][3-i] = shape[i][j];
+        }
+    }
+    return tempShape;
+  }
 
 
 
@@ -66,7 +79,7 @@ public class Bloxrominoe implements GameObject{
     // Yes -> Move moveDown
     // No -> start timer
     // if Timer exceeds time
-    // Stop
+    // Stop, or maybe don't stop. Who knows?
   }
 
   private void move(int direction){
