@@ -157,9 +157,11 @@ public class Bloxrominoe implements GameObject{
 
   public void moveDown(int[][] grid){
     boolean canMoveDown = true;
-    for(int i = 0; i < getLowestRow().length; i++){
+    for(int i = 0; i < 5; i++){
       try{
-        if(getLowestRow()[i] == 1 && grid[ypos + 5][xpos + i] == 1){
+        System.out.println(getLowestRow()[i]);
+        if(shape[getLowestRow()][i] == 1 && grid[ypos + 6][xpos + i] == 1){
+
           canMoveDown = false;
         }
       } catch(NullPointerException e) {
@@ -184,15 +186,15 @@ public class Bloxrominoe implements GameObject{
   }
 
 
-  private int[] getLowestRow(){
+  private int getLowestRow(){
     for(int i = shape.length - 1; i > 0; i--){
       for(int j = 0; j < shape.length; j++){
         if(shape[i][j] == 1){
-          return shape[i];
+          return i;
         }
       }
     }
-    return new int[0];
+    return 0;
   }
 
   public void initialize(){

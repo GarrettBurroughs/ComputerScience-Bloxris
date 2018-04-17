@@ -175,6 +175,9 @@ public class GameplayScreen extends Screen{
 
   public GameplayScreen(){
     b =  Bloxrominoe.randomBloxrominoe(3, 3);
+    for(int i = 0; i < 10; i++){
+      grid[17][i] = 1;
+    }
   }
 
   @Override
@@ -213,7 +216,7 @@ public class GameplayScreen extends Screen{
           stroke(0);
         }else{
           fill(0);
-          stroke(255);
+          stroke(0);
         }
         rect((width / 5 + j * blockX), (i * blockY), (blockX), (blockY));
       }

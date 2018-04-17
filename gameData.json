@@ -1,5 +1,6 @@
 {
   "tickRate" : 2,
+  "frameRate" : 60, 
   "highscore" : 0,
   "scores" : []
 }

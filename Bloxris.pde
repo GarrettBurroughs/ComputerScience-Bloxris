@@ -8,20 +8,18 @@ static ArrayList<Screen> screens = new ArrayList();
 static Screen currentScreen;
 // A file to store information about the game
 JSONObject gameData;
-int tickRate;
 public PFont f;
 
 void setup(){
   // Set global variables
   gameData = loadJSONObject("gameData.json");
-  tickRate = gameData.getInt("tickRate");
 
   f = loadFont("bloxrisFont2.vlw");
 
   // Basic Processing enviornment setup
   size(1000,1000);
   background(0);
-  frameRate(tickRate);
+  frameRate(gameData.getInt("frameRate"));
 
   screens.add(new StartScreen()); // Screen 1
 

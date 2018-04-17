@@ -159,7 +159,9 @@ public class Bloxrominoe implements GameObject{
     boolean canMoveDown = true;
     for(int i = 0; i < getLowestRow().length; i++){
       try{
-        if(getLowestRow()[i] == 1 && grid[ypos + 5][xpos + i] == 1){
+        System.out.println(getLowestRow()[i]);
+        if(getLowestRow()[i] == 1 && grid[ypos + 6][xpos + i] == 1){
+
           canMoveDown = false;
         }
       } catch(NullPointerException e) {
