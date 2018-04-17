@@ -7,7 +7,7 @@ public class Bloxrominoe implements GameObject{
   private static final int[][] SSchematic = {
     {0, 0, 0, 0},
     {0, 0, 0, 0},
-    {0, 0, 0, 0},
+    {0, 1, 1, 1},
     {0, 0, 0, 0}
   };
 
@@ -47,8 +47,12 @@ public class Bloxrominoe implements GameObject{
   };
 
 
-  public static Bloxrominoe Sshape = new Bloxrominoe(SSchematic);
-
+  public static Bloxrominoe SShape = new Bloxrominoe(SSchematic);
+  public static Bloxrominoe ZShape = new Bloxrominoe(ZSchematic);
+  public static Bloxrominoe TShape = new Bloxrominoe(TSchematic);
+  public static Bloxrominoe LineShape = new Bloxrominoe(LineSchematic);
+  public static Bloxrominoe MirroredLShape = new Bloxrominoe(MirroredLSchematic);
+  public static Bloxrominoe SquareShape = new Bloxrominoe(SquareSchematic);
 
   private Bloxrominoe(int[][] shape){
     this.shape = shape;

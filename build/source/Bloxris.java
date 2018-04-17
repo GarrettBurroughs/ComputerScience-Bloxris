@@ -287,7 +287,7 @@ public class screenSwitchButton extends Button
     }
   }
 }
-  public void settings() {  size(720, 480); }
+  public void settings() {  size(1000,1000); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Bloxris" };
     if (passedArgs != null) {

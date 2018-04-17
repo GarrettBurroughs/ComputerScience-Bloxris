@@ -6,9 +6,9 @@ public class Bloxrominoe implements GameObject{
 
   private static final int[][] SSchematic = {
     {0, 0, 0, 0},
-    {0, 0, 0, 0},
-    {0, 1, 1, 1},
-    {0, 0, 0, 0}
+    {0, 0, 1, 1},
+    {0, 0, 1, 0},
+    {0, 1, 1, 0}
   };
 
   private static final int[][] ZSchematic = {
@@ -54,9 +54,12 @@ public class Bloxrominoe implements GameObject{
   public static Bloxrominoe MirroredLShape = new Bloxrominoe(MirroredLSchematic);
   public static Bloxrominoe SquareShape = new Bloxrominoe(SquareSchematic);
 
+
   private Bloxrominoe(int[][] shape){
     this.shape = shape;
   }
+
+
 
   private void moveDown(int[][] grid){
     // Check if can moveDown

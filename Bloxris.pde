@@ -19,7 +19,7 @@ void setup(){
   f = loadFont("bloxrisFont2.vlw");
 
   // Basic Processing enviornment setup
-  size(720, 480);
+  size(1000,1000);
   background(0);
   frameRate(tickRate);
 
