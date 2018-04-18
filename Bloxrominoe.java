@@ -19,25 +19,25 @@ public class Bloxrominoe implements GameObject{
   private static final int[][] SSchematic = {
     {0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0},
-    {0, 0, 1, 1, 0},
-    {0, 0, 1, 0, 0},
-    {0, 1, 1, 0, 0}
+    {0, 0, 5, 5, 0},
+    {0, 5, 5, 0, 0},
+    {0, 0, 0, 0, 0}
   };
 
   private static final int[][] ZSchematic = {
     {0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0},
-    {0, 1, 1, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 0, 1, 1, 0}
+    {0, 7, 7, 0, 0},
+    {0, 0, 7, 7, 0},
+    {0, 0, 0, 0, 0}
   };
 
   private static final int[][] TSchematic = {
     {0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 1, 1, 1, 0}
+    {0, 0, 6, 0, 0},
+    {0, 6, 6, 6, 0},
+    {0, 0, 0, 0, 0}
   };
 
   private static final int[][] LineSchematic = {
@@ -51,26 +51,26 @@ public class Bloxrominoe implements GameObject{
 
   private static final int[][] MirroredLSchematic = {
     {0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 0, 1, 1, 0}
+    {0, 0, 3, 0, 0},
+    {0, 0, 3, 0, 0},
+    {0, 0, 3, 3, 0},
+    {0, 0, 0, 0, 0}
   };
 
   private static final int[][] LSchematic = {
     {0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 0, 1, 0, 0},
-    {0, 1, 1, 0, 0}
+    {0, 0, 2, 0, 0},
+    {0, 0, 2, 0, 0},
+    {0, 2, 2, 0, 0},
+    {0, 0, 0, 0, 0}
   };
 
   private static final int[][] SquareSchematic = {
     {0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0},
-    {0, 0, 1, 1, 0},
-    {0, 0, 1, 1, 0}
+    {0, 0, 4, 4, 0},
+    {0, 0, 4, 4, 0}
   };
 
   public enum Shape{
@@ -150,6 +150,20 @@ public class Bloxrominoe implements GameObject{
             tempShape[j][4-i] = shape[i][j];
         }
     }
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            if(j + getLowestRow(tempShape) - 4 > 0)
+            {
+              shape[i][j] = tempShape[i][j + getLowestRow(tempShape) - 4]; 
+            }
+            else
+            {
+              shape[i][j] = 0;
+            }
+        }
+    }
     this.shape = tempShape;
     /*
     if(getLowestRow() != 0){
@@ -164,7 +178,16 @@ public class Bloxrominoe implements GameObject{
     }*/
   }
 
-
+  private int getLowestRow(int[][] tempShape){
+    for(int i = tempShape.length - 1; i > 0; i--){
+      for(int j = 0; j < tempShape.length; j++){
+        if(tempShape[i][j] == 1){
+          return i;
+        }
+      }
+    }
+    return 0;
+  }
 
   public void moveDown(int[][] grid){
     boolean canMoveDown = true;
