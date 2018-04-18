@@ -5,6 +5,7 @@ public class GameplayScreen extends Screen{
   private final float blockX = (3 * width / 5) / 10;
   private final float blockY = height / 20;
   private Bloxrominoe b;
+  private int time = 0;
 
   public GameplayScreen(){
     b =  Bloxrominoe.randomBloxrominoe(3, 3);
@@ -15,21 +16,46 @@ public class GameplayScreen extends Screen{
 
   @Override
   public void screenUpdate(){
-    for(int i = 0; i < 5; i++){
-      for(int j = 0; j < 5; j++){
-        // Make sure it is in bounds
-        if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-          if(i > b.shape.length){
-            if(b.shape[i + 1][j] == 1){
-              grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-            }
-          }
-          grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-
-        }
-      }
-    }
-    b.moveDown(grid);
+    if(millis()-time >= 500)
+    {
+    
+              for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                  // Make sure it is in bounds
+                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+                    if(i > b.shape.length){
+                      if(b.shape[i + 1][j] == 1){
+                        grid[b.ypos + i][b.xpos + j] = 0;
+                      }
+                    }
+                    grid[b.ypos + i][b.xpos + j] = 0;
+          
+                  }
+                }
+              }
+              
+              
+              b.moveDown(grid);
+              
+              
+              for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                  // Make sure it is in bounds
+                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+                    if(i > b.shape.length){
+                      if(b.shape[i + 1][j] == 1){
+                        grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+                      }
+                    }
+                    grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+          
+                  }
+                }
+              }
+              
+      time = millis();  
+  }
+    
   }
 
   @Override
@@ -64,16 +90,100 @@ public class GameplayScreen extends Screen{
   @Override
   public void pressed(char c){
     if(c == 'r'){
+      for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                  // Make sure it is in bounds
+                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+                    if(i > b.shape.length){
+                      if(b.shape[i + 1][j] == 1){
+                        grid[b.ypos + i][b.xpos + j] = 0;
+                      }
+                    }
+                    grid[b.ypos + i][b.xpos + j] = 0;
+          
+                  }
+                }
+              }
       b.rotatePiece();
+      for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                  // Make sure it is in bounds
+                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+                    if(i > b.shape.length){
+                      if(b.shape[i + 1][j] == 1){
+                        grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+                      }
+                    }
+                    grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+          
+                  }
+                }
+              }
     }
     if(c == 'n'){
       b = Bloxrominoe.randomBloxrominoe(3, 3);
     }
     if(c == 'a'){
-      b.move(1);
+      for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                  // Make sure it is in bounds
+                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+                    if(i > b.shape.length){
+                      if(b.shape[i + 1][j] == 1){
+                        grid[b.ypos + i][b.xpos + j] = 0;
+                      }
+                    }
+                    grid[b.ypos + i][b.xpos + j] = 0;
+          
+                  }
+                }
+              }
+            b.move(-1);
+            for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                  // Make sure it is in bounds
+                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+                    if(i > b.shape.length){
+                      if(b.shape[i + 1][j] == 1){
+                        grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+                      }
+                    }
+                    grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+          
+                  }
+                }
+              }
     }
     if(c == 'd'){
-      b.move(-1);
+      for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                  // Make sure it is in bounds
+                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+                    if(i > b.shape.length){
+                      if(b.shape[i + 1][j] == 1){
+                        grid[b.ypos + i][b.xpos + j] = 0;
+                      }
+                    }
+                    grid[b.ypos + i][b.xpos + j] = 0;
+          
+                  }
+                }
+              }
+          b.move(1);
+          for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                  // Make sure it is in bounds
+                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+                    if(i > b.shape.length){
+                      if(b.shape[i + 1][j] == 1){
+                        grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+                      }
+                    }
+                    grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+          
+                  }
+                }
+              }
     }
 
     println(c);
