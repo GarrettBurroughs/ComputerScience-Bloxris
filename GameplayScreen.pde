@@ -18,9 +18,13 @@ public class GameplayScreen extends Screen{
     for(int i = 0; i < 5; i++){
       for(int j = 0; j < 5; j++){
         // Make sure it is in bounds
-        try{
-
-        }finally{
+        if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
+          if(i > b.shape.length){
+            if(b.shape[i + 1][j] == 1){
+              grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+            }
+          }
+          grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
 
         }
       }
@@ -65,6 +69,13 @@ public class GameplayScreen extends Screen{
     if(c == 'n'){
       b = Bloxrominoe.randomBloxrominoe(3, 3);
     }
+    if(c == 'a'){
+      b.move(1);
+    }
+    if(c == 'd'){
+      b.move(-1);
+    }
+
     println(c);
   }
 }
