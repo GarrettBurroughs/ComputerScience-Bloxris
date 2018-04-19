@@ -6,6 +6,7 @@ public class GameplayScreen extends Screen{
   private final float blockY = height / 20;
   private Bloxrominoe b;
   private int time = 0;
+  private String debug = "";
 
   public GameplayScreen(){
     b =  Bloxrominoe.randomBloxrominoe(0, 3);
@@ -52,6 +53,9 @@ public class GameplayScreen extends Screen{
     textAlign(CENTER);
     fill(255);
     stroke(255);
+    textAlign(CORNER);
+    fill(255);
+    text(debug, 0, 0);
     for(int i = 0; i < grid.length; i++){
       for(int j = 0; j < grid[i].length; j++)
       {
@@ -82,12 +86,14 @@ public class GameplayScreen extends Screen{
       break;
       case 'a':
               unDrawShape();
-              b.move(-1);
+              if(checkBounds(-1))
+                b.move(-1);
               drawShape();
       break;
       case 'd':
             unDrawShape();
-            b.move(1);
+            if(checkBounds(1))
+              b.move(1);
             drawShape();
       break;
       case 's':
@@ -99,15 +105,98 @@ public class GameplayScreen extends Screen{
     println(c);
   }
   
+  public boolean checkBounds(int dir)
+  {
+    boolean canMove = false;
+    int max = -1;
+    if(dir>0)
+    {
+      for(int j = 0; j < 5; j++)
+      {
+<<<<<<< HEAD
+         max = checkCol(b.shape, j) ? j : max;
+      }
+      debug = "MAX:" + (int)(b.xpos + max);
+=======
+         max = checkCol(b.shape[j]) ? j : max;
+      }
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+      if(b.xpos + max  < 10)
+      {
+        canMove = true;
+      }
+    }
+    else
+    {
+      for(int j = 4; j > -1; j--)
+      {
+<<<<<<< HEAD
+         max = checkCol(b.shape, j) ? j : max;
+      }
+      debug = "MAX:" + (int)(b.xpos + max);
+      
+      if(b.xpos + max -2 > -1)
+=======
+         max = checkCol(b.shape[j]) ? j : max;
+      }
+      if(b.xpos + max  > -1)
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+      {
+        canMove = true;
+      }
+    }
+    return canMove;
+  }
+<<<<<<< HEAD
+  public boolean checkCol(int[][] shape, int col)
+  {
+    boolean contains = false;
+    
+    
+    
+    for(int[] tmp : shape)
+    {
+       contains = tmp[col]>=1?true:contains; 
+    }
+    return contains;
+  }
+=======
+  public boolean checkCol(int[] col)
+  {
+    boolean contains = false;
+    for(int tmp : col)
+    {
+       contains = tmp>=1?true:contains; 
+    }
+    return contains;
+  }
+  
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+  
+  /*
+    public boolean checkCol(int[] col)
+  {
+<<<<<<< HEAD
+    boolean contains = false;
+    for(int tmp : col)
+    {
+       contains = tmp>=1?true:contains; 
+    }
+    return contains;
+  }
+  */
+  
   
     public void drawShape()
   {
-    for(int i = 0; i < 5; i++)
-    {
+=======
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+                for(int i = 0; i < 5; i++)
+                {
                   for(int j = 0; j < 5; j++)
                   {
                     // Make sure it is in bounds
-                    if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20)
+                    if(b.shape[i][j] != 0 && b.xpos + j-1 < 10 && b.xpos + j > 0 && b.xpos + j < 20)
                     {
                       if(i > b.shape.length)
                       {
@@ -116,7 +205,7 @@ public class GameplayScreen extends Screen{
                           grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
                         }
                       }
-                      grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+                      grid[b.ypos + i][b.xpos + j-1] = b.shape[i][j];
             
                     }
                   }
@@ -130,7 +219,7 @@ public class GameplayScreen extends Screen{
                 for(int j = 0; j < 5; j++)
                 {
                   // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20)
+                  if(b.shape[i][j] != 0 && b.xpos + j-1 < 10 && b.xpos + j > 0 && b.xpos + j < 20)
                   {
                     if(i > b.shape.length)
                     {
@@ -139,7 +228,7 @@ public class GameplayScreen extends Screen{
                         grid[b.ypos + i][b.xpos + j] = 0;
                       }
                     }
-                    grid[b.ypos + i][b.xpos + j] = 0;
+                    grid[b.ypos + i][b.xpos + j-1] = 0;
           
                   }
                 }
