@@ -97,9 +97,7 @@ public class Bloxrominoe implements GameObject{
     private static final Random RANDOM = new Random();
 
     public static Shape random()  {
-      int test = RANDOM.nextInt(SIZE);
-      System.out.println("***Test:" + test);
-      return VALUES.get(test);
+      return VALUES.get(RANDOM.nextInt(SIZE));
     }
   }
 
@@ -208,7 +206,7 @@ public class Bloxrominoe implements GameObject{
         {
          lowest = shape[j][i]>0?j:lowest; 
         }
-        if(lowest >= 0 && grid[ypos + lowest + 1][xpos + i] >= 1){
+        if(lowest >= 0 && grid[ypos + lowest + 1][xpos + i-1] >= 1){
           canMoveDown = false;
         }
         //if(lowest >= 0){
