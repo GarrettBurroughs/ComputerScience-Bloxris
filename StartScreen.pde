@@ -3,9 +3,9 @@ class StartScreen extends Screen{
   public StartScreen(){
     addObjects(
       new screenSwitchButton(width/2, height/2, "Start", new GameplayScreen()),
-      new screenSwitchButton(width/2, height/2 + 60, "Statistics", currentScreen),
-      new screenSwitchButton(width/2, height/2 + 120, "Options", currentScreen),
-      new screenSwitchButton(width/2, height/2 + 180, "Quit", currentScreen)
+      new screenSwitchButton(width/2, height/2 + 60, "Statistics", this),
+      new screenSwitchButton(width/2, height/2 + 120, "Options", this),
+      new quitButton(width/2, height/2 + 180, "Quit")
     );
   }
 

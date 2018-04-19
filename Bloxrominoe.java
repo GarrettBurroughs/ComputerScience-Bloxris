@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.List;
 import java.util.Collections;
 import java.util.Arrays;
-import java.lang.NullPointerException;
+import java.lang.IndexOutOfBoundsException;
 
 
 
@@ -189,25 +189,43 @@ public class Bloxrominoe implements GameObject{
     return 0;
   }
 
-  public void moveDown(int[][] grid){
+  public void moveDown(int[][] grid)
+  {
     boolean canMoveDown = true;
-    for(int i = 0; i < 5; i++){
-      try{
-        System.out.println(getLowestRow());
-        System.out.println("Grid Value: " + grid[ypos + i + 2][xpos + i]);
-        System.out.println("Y value: " + (ypos + i + 2));
-        System.out.println("X Value: " + (xpos + i));
-        if(shape[getLowestRow()][i] >= 1 && grid[ypos + getLowestRow() + 1][xpos + i] >= 1){
+    for(int i = 0; i < 5; i++)
+    {
+      try
+      {
+        //System.out.println(getLowestRow());
+        //System.out.println("Grid Value: " + grid[ypos + i + 2][xpos + i -1]);
+        //System.out.println("Y value: " + (ypos + i + 2));
+        //System.out.println("X Value: " + (xpos + i));
+        int lowest = -1;
+        for(int j = 0; j < 5; j++)
+        {
+         lowest = shape[j][i]>0?j:lowest; 
+        }
+        if(lowest >= 0 && grid[ypos + lowest + 1][xpos + i] >= 1){
           canMoveDown = false;
         }
-      } catch(NullPointerException e) {
+        //if(lowest >= 0){
+        //  grid[ypos + lowest + 2][xpos + i] = 1;
+        //}
+        //if(lowest >= 0){
+        //  shape[lowest + 1][i] = 1;
+        //}
+        System.out.print(lowest);
+      } 
+      catch(IndexOutOfBoundsException e) 
+      {
         canMoveDown = false;
       }
     }
     if(canMoveDown){
       ypos++;
     }
-    else{
+    else
+    {
 
     }
     // Check if can moveDown
