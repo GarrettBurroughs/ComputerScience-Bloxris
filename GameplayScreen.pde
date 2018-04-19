@@ -8,50 +8,30 @@ public class GameplayScreen extends Screen{
   private int time = 0;
 
   public GameplayScreen(){
-    b =  Bloxrominoe.randomBloxrominoe(3, 3);
+    b =  Bloxrominoe.randomBloxrominoe(0, 3);
     for(int i = 0; i < 10; i++){
       grid[17][i] = 1;
     }
   }
+
 
   @Override
   public void screenUpdate(){
     if(millis()-time >= 500)
     {
     
-              for(int i = 0; i < 5; i++){
-                for(int j = 0; j < 5; j++){
-                  // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-                    if(i > b.shape.length){
-                      if(b.shape[i + 1][j] == 1){
-                        grid[b.ypos + i][b.xpos + j] = 0;
-                      }
-                    }
-                    grid[b.ypos + i][b.xpos + j] = 0;
-          
-                  }
-                }
+              unDrawShape();
+              
+              
+              if(!b.moveDown(grid))
+              {
+                drawShape();
+                b =  Bloxrominoe.randomBloxrominoe(0, 0);
+                
               }
               
               
-              b.moveDown(grid);
-              
-              
-              for(int i = 0; i < 5; i++){
-                for(int j = 0; j < 5; j++){
-                  // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-                    if(i > b.shape.length){
-                      if(b.shape[i + 1][j] == 1){
-                        grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-                      }
-                    }
-                    grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-          
-                  }
-                }
-              }
+              drawShape();
               
       time = millis();  
   }
@@ -88,104 +68,81 @@ public class GameplayScreen extends Screen{
   }
 
   @Override
-  public void pressed(char c){
-    if(c == 'r'){
-      for(int i = 0; i < 5; i++){
-                for(int j = 0; j < 5; j++){
-                  // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-                    if(i > b.shape.length){
-                      if(b.shape[i + 1][j] == 1){
-                        grid[b.ypos + i][b.xpos + j] = 0;
-                      }
-                    }
-                    grid[b.ypos + i][b.xpos + j] = 0;
-          
-                  }
-                }
-              }
-      b.rotatePiece();
-      for(int i = 0; i < 5; i++){
-                for(int j = 0; j < 5; j++){
-                  // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-                    if(i > b.shape.length){
-                      if(b.shape[i + 1][j] == 1){
-                        grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-                      }
-                    }
-                    grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-          
-                  }
-                }
-              }
+  public void pressed(char c)
+  {
+    switch(c)
+    {
+      case 'r':
+        unDrawShape();
+        b.rotatePiece();
+        drawShape();
+      break;
+      case 'n':
+        b = Bloxrominoe.randomBloxrominoe(0, 0);
+      break;
+      case 'a':
+              unDrawShape();
+              b.move(-1);
+              drawShape();
+      break;
+      case 'd':
+            unDrawShape();
+            b.move(1);
+            drawShape();
+      break;
+      case 's':
+        unDrawShape();
+        b.moveDown(grid);
+        drawShape();
+      break;
     }
-    if(c == 'n'){
-      b = Bloxrominoe.randomBloxrominoe(3, 3);
-    }
-    if(c == 'a'){
-      for(int i = 0; i < 5; i++){
-                for(int j = 0; j < 5; j++){
-                  // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-                    if(i > b.shape.length){
-                      if(b.shape[i + 1][j] == 1){
-                        grid[b.ypos + i][b.xpos + j] = 0;
-                      }
-                    }
-                    grid[b.ypos + i][b.xpos + j] = 0;
-          
-                  }
-                }
-              }
-            b.move(-1);
-            for(int i = 0; i < 5; i++){
-                for(int j = 0; j < 5; j++){
-                  // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-                    if(i > b.shape.length){
-                      if(b.shape[i + 1][j] == 1){
-                        grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-                      }
-                    }
-                    grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-          
-                  }
-                }
-              }
-    }
-    if(c == 'd'){
-      for(int i = 0; i < 5; i++){
-                for(int j = 0; j < 5; j++){
-                  // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-                    if(i > b.shape.length){
-                      if(b.shape[i + 1][j] == 1){
-                        grid[b.ypos + i][b.xpos + j] = 0;
-                      }
-                    }
-                    grid[b.ypos + i][b.xpos + j] = 0;
-          
-                  }
-                }
-              }
-          b.move(1);
-          for(int i = 0; i < 5; i++){
-                for(int j = 0; j < 5; j++){
-                  // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-                    if(i > b.shape.length){
-                      if(b.shape[i + 1][j] == 1){
-                        grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-                      }
-                    }
-                    grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-          
-                  }
-                }
-              }
-    }
-
     println(c);
+  }
+  
+  
+    public void drawShape()
+  {
+    for(int i = 0; i < 5; i++)
+    {
+                  for(int j = 0; j < 5; j++)
+                  {
+                    // Make sure it is in bounds
+                    if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20)
+                    {
+                      if(i > b.shape.length)
+                      {
+                        if(b.shape[i + 1][j] == 1)
+                        {
+                          grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+                        }
+                      }
+                      grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+            
+                    }
+                  }
+                }
+  }
+  
+  public void unDrawShape()
+  {
+    for(int i = 0; i < 5; i++)
+    {
+                for(int j = 0; j < 5; j++)
+                {
+                  // Make sure it is in bounds
+                  if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20)
+                  {
+                    if(i > b.shape.length)
+                    {
+                      if(b.shape[i + 1][j] == 1)
+                      {
+                        grid[b.ypos + i][b.xpos + j] = 0;
+                      }
+                    }
+                    grid[b.ypos + i][b.xpos + j] = 0;
+          
+                  }
+                }
+              }
   }
 }

@@ -97,7 +97,9 @@ public class Bloxrominoe implements GameObject{
     private static final Random RANDOM = new Random();
 
     public static Shape random()  {
-      return VALUES.get(RANDOM.nextInt(SIZE));
+      int test = RANDOM.nextInt(SIZE);
+      System.out.println("***Test:" + test);
+      return VALUES.get(test);
     }
   }
 
@@ -106,13 +108,13 @@ public class Bloxrominoe implements GameObject{
   }
 
   public static Bloxrominoe getBloxrominoe(Shape s, int xpos, int ypos){
-    switch(s){
+    switch(s)
+    {
       case S:
         return new Bloxrominoe(SSchematic, xpos, ypos);
 
       case Z:
         return new Bloxrominoe(ZSchematic, xpos, ypos);
-
 
       case T:
         return new Bloxrominoe(TSchematic, xpos, ypos);
@@ -131,6 +133,7 @@ public class Bloxrominoe implements GameObject{
       default:
       return null;
     }
+    
   }
 
   private Bloxrominoe(int[][] shape, int xpos, int ypos){
@@ -189,7 +192,7 @@ public class Bloxrominoe implements GameObject{
     return 0;
   }
 
-  public void moveDown(int[][] grid)
+  public boolean moveDown(int[][] grid)
   {
     boolean canMoveDown = true;
     for(int i = 0; i < 5; i++)
@@ -228,6 +231,7 @@ public class Bloxrominoe implements GameObject{
     {
 
     }
+    return canMoveDown;
     // Check if can moveDown
     // Yes -> Move moveDown
     // No -> start timer
