@@ -121,6 +121,10 @@ public class GameplayScreen extends Screen{
          max = checkCol(b.shape[j]) ? j : max;
       }
 >>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+=======
+         max = checkCol(b.shape[j]) ? j : max;
+      }
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
       if(b.xpos + max  < 10)
       {
         canMove = true;
@@ -136,6 +140,11 @@ public class GameplayScreen extends Screen{
       debug = "MAX:" + (int)(b.xpos + max);
       
       if(b.xpos + max -2 > -1)
+=======
+         max = checkCol(b.shape[j]) ? j : max;
+      }
+      if(b.xpos + max  > -1)
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
 =======
          max = checkCol(b.shape[j]) ? j : max;
       }
