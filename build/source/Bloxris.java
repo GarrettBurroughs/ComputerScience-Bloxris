@@ -167,36 +167,50 @@ public abstract class Button implements GameObject
 public class GameplayScreen extends Screen{
 
   int[][] grid = new int[20][10];
+  int[] colors = {color(0),color(0,240,240), color(0,0,240), color(240,160,0), color(240,240,0), color(0,240,0), color(160,0,240), color(240,0,0)};
   private final float blockX = (3 * width / 5) / 10;
   private final float blockY = height / 20;
   private Bloxrominoe b;
+  private int time = 0;
+  private String debug = "";
+  private int timePerTick = 500;
 
   public GameplayScreen(){
-    b =  Bloxrominoe.randomBloxrominoe(3, 3);
+    b =  Bloxrominoe.randomBloxrominoe(0, 3);
     for(int i = 0; i < 10; i++){
       grid[17][i] = 1;
     }
   }
 
+
   @Override
   public void screenUpdate(){
-    for(int i = 0; i < 5; i++){
-      for(int j = 0; j < 5; j++){
-        // Make sure it is in bounds
-        if(b.shape[i][j] != 0 && b.xpos + j > 0 && b.xpos + j < 20){
-          if(i > b.shape.length){
-            if(b.shape[i + 1][j] == 1){
-              grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-            }
-          }
-          grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
-        }else if(i > 0  && j > 0 && j < b.shape[i].length - 1){
-          if(b.xpos + j > 0 && b.xpos + j < 20 && b.shape[i - 1][j + 1] == 1 || b.shape[i - 1][j - 1] == 1){
-          }
-        }
+    timePerTick = 500;
+    if(keyPressed)
+    {
+      if(key == ' '){
+        timePerTick = 50;
       }
     }
-    b.moveDown(grid);
+    if(millis()-time >= timePerTick)
+    {
+
+              unDrawShape();
+
+
+              if(!b.moveDown(grid))
+              {
+                drawShape();
+                b =  Bloxrominoe.randomBloxrominoe(0, 0);
+
+              }
+
+
+              drawShape();
+
+      time = millis();
+  }
+
   }
 
   @Override
@@ -213,15 +227,14 @@ public class GameplayScreen extends Screen{
     textAlign(CENTER);
     fill(255);
     stroke(255);
+    textAlign(CORNER);
+    fill(255);
+    text(debug, 0, 0);
     for(int i = 0; i < grid.length; i++){
-      for(int j = 0; j < grid[i].length; j++){
-        if(grid[i][j] == 1){
-          fill(255);
+      for(int j = 0; j < grid[i].length; j++)
+      {
+          fill(colors[grid[i][j]]);
           stroke(0);
-        }else{
-          fill(0);
-          stroke(255);
-        }
         rect((width / 5 + j * blockX), (i * blockY), (blockX), (blockY));
       }
     }
@@ -233,21 +246,126 @@ public class GameplayScreen extends Screen{
   }
 
   @Override
-  public void pressed(char c){
-    if(c == 'r'){
-      b.rotatePiece();
+  public void pressed(char c)
+  {
+    switch(c)
+    {
+      case 'r':
+        unDrawShape();
+        b.rotatePiece();
+        drawShape();
+      break;
+      case 'n':
+        b = Bloxrominoe.randomBloxrominoe(0, 0);
+      break;
+      case 'a':
+              unDrawShape();
+              if(checkBounds(-1))
+                b.move(-1);
+              drawShape();
+      break;
+      case 'd':
+            unDrawShape();
+            if(checkBounds(1))
+              b.move(1);
+            drawShape();
+      break;
+      case 's':
+        unDrawShape();
+        b.moveDown(grid);
+        drawShape();
+      break;
     }
-    if(c == 'n'){
-      b = Bloxrominoe.randomBloxrominoe(3, 3);
-    }
-    if(c == 'a'){
-      b.move(1);
-    }
-    if(c == 'd'){
-      b.move(-1);
-    }
-
     println(c);
+  }
+
+  public boolean checkBounds(int dir)
+{
+  boolean canMove = false;
+  int max = -1;
+  if(dir>0)
+  {
+    for(int j = 0; j < 5; j++)
+    {
+       max = checkCol(b.shape, j) ? j : max;
+    }
+    debug = "MAX:" + (int)(b.xpos + max);
+    if(b.xpos + max  < 10)
+    {
+      canMove = true;
+    }
+  }
+  else
+  {
+    for(int j = 4; j > -1; j--)
+    {
+       max = checkCol(b.shape, j) ? j : max;
+    }
+    debug = "MAX:" + (int)(b.xpos + max);
+
+    if(b.xpos + max -2 > -1)
+    {
+      canMove = true;
+    }
+  }
+  return canMove;
+}
+
+  public boolean checkCol(int[][] shape, int col)
+  {
+    boolean contains = false;
+
+    for(int[] tmp : shape)
+    {
+       contains = tmp[col]>=1?true:contains;
+    }
+    return contains;
+  }
+
+
+    public void drawShape()
+  {
+                for(int i = 0; i < 5; i++)
+                {
+                  for(int j = 0; j < 5; j++)
+                  {
+                    // Make sure it is in bounds
+                    if(b.shape[i][j] != 0 && b.xpos + j-1 < 10 && b.xpos + j > 0 && b.xpos + j < 20)
+                    {
+                      if(i > b.shape.length)
+                      {
+                        if(b.shape[i + 1][j] == 1)
+                        {
+                          grid[b.ypos + i][b.xpos + j] = b.shape[i][j];
+                        }
+                      }
+                      grid[b.ypos + i][b.xpos + j-1] = b.shape[i][j];
+
+                    }
+                  }
+                }
+  }
+
+  public void unDrawShape()
+  {
+    for(int i = 0; i < 5; i++)
+    {
+              for(int j = 0; j < 5; j++)
+              {
+                // Make sure it is in bounds
+                if(b.shape[i][j] != 0 && b.xpos + j-1 < 10 && b.xpos + j > 0 && b.xpos + j < 20)
+                {
+                  if(i > b.shape.length)
+                  {
+                    if(b.shape[i + 1][j] == 1)
+                    {
+                      grid[b.ypos + i][b.xpos + j] = 0;
+                    }
+                  }
+                  grid[b.ypos + i][b.xpos + j-1] = 0;
+                }
+              }
+            }
   }
 }
 class StartScreen extends Screen{
@@ -255,9 +373,9 @@ class StartScreen extends Screen{
   public StartScreen(){
     addObjects(
       new screenSwitchButton(width/2, height/2, "Start", new GameplayScreen()),
-      new screenSwitchButton(width/2, height/2 + 60, "Statistics", currentScreen),
-      new screenSwitchButton(width/2, height/2 + 120, "Options", currentScreen),
-      new screenSwitchButton(width/2, height/2 + 180, "Quit", currentScreen)
+      new screenSwitchButton(width/2, height/2 + 60, "Statistics", this),
+      new screenSwitchButton(width/2, height/2 + 120, "Options", this),
+      new quitButton(width/2, height/2 + 180, "Quit")
     );
   }
 
@@ -328,6 +446,20 @@ public static abstract class Utils
 {
   
 }
+public class quitButton extends Button
+{
+  public quitButton(int x, int y, String text)
+  {
+    super( x,  y,  text );
+  }
+  public void click()
+  {
+    if(mouseX<=x+boxWidth/2 && mouseX>=x-boxWidth/2 && mouseY<=y+boxHeight/2 && mouseY>=y-boxHeight/2)
+    {
+        exit();
+    }
+  }
+}
 public class screenSwitchButton extends Button
 {
   Screen targetScreen;
@@ -344,7 +476,7 @@ public class screenSwitchButton extends Button
     }
   }
 }
-  public void settings() {  size(1000,1000); }
+  public void settings() {  size(800,900); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "Bloxris" };
     if (passedArgs != null) {

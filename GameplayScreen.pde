@@ -8,6 +8,7 @@ public class GameplayScreen extends Screen{
   private int time = 0;
   private String debug = "";
   private int initTime;
+  private float timePerTick = 500;
 
   public GameplayScreen(){
     b =  Bloxrominoe.randomBloxrominoe(0, 3);
@@ -20,8 +21,16 @@ public class GameplayScreen extends Screen{
 
   @Override
   public void screenUpdate(){
-    if(millis()-time >= 500 - 0.001*(millis()-initTime) )
+    timePerTick = 500 - 0.001*(millis()-initTime);
+    if(keyPressed)
     {
+      if(key == ' '){
+        timePerTick = 50;
+      }
+    }
+    if(millis()-time >= timePerTick)
+    {
+
               unDrawShape();
               if(!b.moveDown(grid))
               {
@@ -29,13 +38,13 @@ public class GameplayScreen extends Screen{
                 checkBloxris();
                 b =  Bloxrominoe.randomBloxrominoe(0, 0);
               }
-              
-              
+
+
               drawShape();
-              
-      time = millis();  
+
+      time = millis();
   }
-    
+
   }
   
   public boolean checkBloxris()
@@ -213,17 +222,16 @@ public class GameplayScreen extends Screen{
                         }
                       }
                       grid[b.ypos + i][b.xpos + j-1] = b.shape[i][j];
-            
                     }
                   }
                 }
   }
-  
+
   public void unDrawShape()
   {
     for(int i = 0; i < 5; i++)
     {
-                for(int j = 0; j < 5; j++)
+              for(int j = 0; j < 5; j++)
                 {
                   // Make sure it is in bounds
                   if(b.shape[i][j] != 0 && b.xpos + j-1 < 10 && b.xpos + j > 0 && b.xpos + j < 20)
