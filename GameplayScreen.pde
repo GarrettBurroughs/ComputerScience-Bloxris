@@ -7,6 +7,7 @@ public class GameplayScreen extends Screen{
   private Bloxrominoe b;
   private int time = 0;
   private String debug = "";
+  private int timePerTick = 500;
 
   public GameplayScreen(){
     b =  Bloxrominoe.randomBloxrominoe(0, 3);
@@ -18,25 +19,32 @@ public class GameplayScreen extends Screen{
 
   @Override
   public void screenUpdate(){
-    if(millis()-time >= 500)
+    timePerTick = 500;
+    if(keyPressed)
     {
-    
+      if(key == ' '){
+        timePerTick = 50;
+      }
+    }
+    if(millis()-time >= timePerTick)
+    {
+
               unDrawShape();
-              
-              
+
+
               if(!b.moveDown(grid))
               {
                 drawShape();
                 b =  Bloxrominoe.randomBloxrominoe(0, 0);
-                
+
               }
-              
-              
+
+
               drawShape();
-              
-      time = millis();  
+
+      time = millis();
   }
-    
+
   }
 
   @Override
@@ -104,126 +112,53 @@ public class GameplayScreen extends Screen{
     }
     println(c);
   }
-  
+
   public boolean checkBounds(int dir)
+{
+  boolean canMove = false;
+  int max = -1;
+  if(dir>0)
   {
-    boolean canMove = false;
-    int max = -1;
-    if(dir>0)
+    for(int j = 0; j < 5; j++)
     {
-      for(int j = 0; j < 5; j++)
-      {
-<<<<<<< HEAD
-         max = checkCol(b.shape, j) ? j : max;
-      }
-      debug = "MAX:" + (int)(b.xpos + max);
-=======
-<<<<<<< HEAD
-         max = checkCol(b.shape, j) ? j : max;
-      }
-      debug = "MAX:" + (int)(b.xpos + max);
-=======
-         max = checkCol(b.shape[j]) ? j : max;
-      }
->>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
-=======
-         max = checkCol(b.shape[j]) ? j : max;
-      }
->>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
->>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
-      if(b.xpos + max  < 10)
-      {
-        canMove = true;
-      }
+       max = checkCol(b.shape, j) ? j : max;
     }
-    else
+    debug = "MAX:" + (int)(b.xpos + max);
+    if(b.xpos + max  < 10)
     {
-      for(int j = 4; j > -1; j--)
-      {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
-         max = checkCol(b.shape, j) ? j : max;
-      }
-      debug = "MAX:" + (int)(b.xpos + max);
-      
-      if(b.xpos + max -2 > -1)
-<<<<<<< HEAD
-=======
-=======
-         max = checkCol(b.shape[j]) ? j : max;
-      }
-      if(b.xpos + max  > -1)
->>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
-=======
-         max = checkCol(b.shape[j]) ? j : max;
-      }
-      if(b.xpos + max  > -1)
->>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
->>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
-      {
-        canMove = true;
-      }
+      canMove = true;
     }
-    return canMove;
   }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
+  else
+  {
+    for(int j = 4; j > -1; j--)
+    {
+       max = checkCol(b.shape, j) ? j : max;
+    }
+    debug = "MAX:" + (int)(b.xpos + max);
+
+    if(b.xpos + max -2 > -1)
+    {
+      canMove = true;
+    }
+  }
+  return canMove;
+}
+
   public boolean checkCol(int[][] shape, int col)
   {
     boolean contains = false;
-    
-    
-    
+
     for(int[] tmp : shape)
     {
-       contains = tmp[col]>=1?true:contains; 
+       contains = tmp[col]>=1?true:contains;
     }
     return contains;
   }
-<<<<<<< HEAD
-=======
-=======
-  public boolean checkCol(int[] col)
-  {
-    boolean contains = false;
-    for(int tmp : col)
-    {
-       contains = tmp>=1?true:contains; 
-    }
-    return contains;
-  }
-  
->>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
->>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
-  
-  /*
-    public boolean checkCol(int[] col)
-  {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
-    boolean contains = false;
-    for(int tmp : col)
-    {
-       contains = tmp>=1?true:contains; 
-    }
-    return contains;
-  }
-  */
-  
-  
+
+
     public void drawShape()
   {
-<<<<<<< HEAD
-=======
-=======
->>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
->>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
                 for(int i = 0; i < 5; i++)
                 {
                   for(int j = 0; j < 5; j++)
@@ -239,32 +174,31 @@ public class GameplayScreen extends Screen{
                         }
                       }
                       grid[b.ypos + i][b.xpos + j-1] = b.shape[i][j];
-            
+
                     }
                   }
                 }
   }
-  
+
   public void unDrawShape()
   {
     for(int i = 0; i < 5; i++)
     {
-                for(int j = 0; j < 5; j++)
+              for(int j = 0; j < 5; j++)
+              {
+                // Make sure it is in bounds
+                if(b.shape[i][j] != 0 && b.xpos + j-1 < 10 && b.xpos + j > 0 && b.xpos + j < 20)
                 {
-                  // Make sure it is in bounds
-                  if(b.shape[i][j] != 0 && b.xpos + j-1 < 10 && b.xpos + j > 0 && b.xpos + j < 20)
+                  if(i > b.shape.length)
                   {
-                    if(i > b.shape.length)
+                    if(b.shape[i + 1][j] == 1)
                     {
-                      if(b.shape[i + 1][j] == 1)
-                      {
-                        grid[b.ypos + i][b.xpos + j] = 0;
-                      }
+                      grid[b.ypos + i][b.xpos + j] = 0;
                     }
-                    grid[b.ypos + i][b.xpos + j-1] = 0;
-          
                   }
+                  grid[b.ypos + i][b.xpos + j-1] = 0;
                 }
               }
+            }
   }
 }
