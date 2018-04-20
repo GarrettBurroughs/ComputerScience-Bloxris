@@ -113,9 +113,24 @@ public class GameplayScreen extends Screen{
     {
       for(int j = 0; j < 5; j++)
       {
+<<<<<<< HEAD
          max = checkCol(b.shape, j) ? j : max;
       }
       debug = "MAX:" + (int)(b.xpos + max);
+=======
+<<<<<<< HEAD
+         max = checkCol(b.shape, j) ? j : max;
+      }
+      debug = "MAX:" + (int)(b.xpos + max);
+=======
+         max = checkCol(b.shape[j]) ? j : max;
+      }
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+=======
+         max = checkCol(b.shape[j]) ? j : max;
+      }
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+>>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
       if(b.xpos + max  < 10)
       {
         canMove = true;
@@ -125,17 +140,38 @@ public class GameplayScreen extends Screen{
     {
       for(int j = 4; j > -1; j--)
       {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
          max = checkCol(b.shape, j) ? j : max;
       }
       debug = "MAX:" + (int)(b.xpos + max);
       
       if(b.xpos + max -2 > -1)
+<<<<<<< HEAD
+=======
+=======
+         max = checkCol(b.shape[j]) ? j : max;
+      }
+      if(b.xpos + max  > -1)
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+=======
+         max = checkCol(b.shape[j]) ? j : max;
+      }
+      if(b.xpos + max  > -1)
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+>>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
       {
         canMove = true;
       }
     }
     return canMove;
   }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
   public boolean checkCol(int[][] shape, int col)
   {
     boolean contains = false;
@@ -148,10 +184,29 @@ public class GameplayScreen extends Screen{
     }
     return contains;
   }
+<<<<<<< HEAD
+=======
+=======
+  public boolean checkCol(int[] col)
+  {
+    boolean contains = false;
+    for(int tmp : col)
+    {
+       contains = tmp>=1?true:contains; 
+    }
+    return contains;
+  }
+  
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+>>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
   
   /*
     public boolean checkCol(int[] col)
   {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
     boolean contains = false;
     for(int tmp : col)
     {
@@ -164,6 +219,11 @@ public class GameplayScreen extends Screen{
   
     public void drawShape()
   {
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> d9f1861c183f38031850a5ffc85d980aa0f2c268
+>>>>>>> 00fe9ce5c9e62309733f7aec2478dcae3b1eaf4a
                 for(int i = 0; i < 5; i++)
                 {
                   for(int j = 0; j < 5; j++)
