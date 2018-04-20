@@ -17,7 +17,7 @@ void setup(){
   f = loadFont("bloxrisFont2.vlw");
 
   // Basic Processing enviornment setup
-  size(800,900);
+  size(700,800);
   background(0);
   frameRate(gameData.getInt("frameRate"));
 
