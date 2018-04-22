@@ -9,6 +9,7 @@ public class GameplayScreen extends Screen{
   private String debug = "";
   private int initTime;
   private float timePerTick = 500;
+  private int score = 0;
 
   public GameplayScreen(){
     b =  Bloxrominoe.randomBloxrominoe(0, 3);
@@ -21,7 +22,7 @@ public class GameplayScreen extends Screen{
 
   @Override
   public void screenUpdate(){
-    timePerTick = 500 - 0.001*(millis()-initTime);
+    timePerTick = 500 - 0.003*(millis()-initTime);
     if(keyPressed)
     {
       if(key == ' '){
@@ -35,8 +36,13 @@ public class GameplayScreen extends Screen{
               if(!b.moveDown(grid))
               {
                 drawShape();
+                score+=5;
                 checkBloxris();
                 b =  Bloxrominoe.randomBloxrominoe(0, 0);
+              }
+              else
+              {
+               score++; 
               }
 
 
@@ -60,6 +66,7 @@ public class GameplayScreen extends Screen{
         if(colFull)
         {
           bloxris = true;
+          score+=100;
           for(int j = 0; j < 10; j++)
           {
               grid[i][j] = 0;
@@ -97,8 +104,9 @@ public class GameplayScreen extends Screen{
     fill(255);
     stroke(255);
     textAlign(CORNER);
+    textFont(f, 20);
     fill(255);
-    text(debug, 0, 0);
+    text("Score: " + score, 10, 100);
     for(int i = 0; i < grid.length; i++){
       for(int j = 0; j < grid[i].length; j++)
       {
@@ -139,11 +147,11 @@ public class GameplayScreen extends Screen{
               b.move(1);
             drawShape();
       break;
-      case 's':
+      /*case 's':
         unDrawShape();
         b.moveDown(grid);
         drawShape();
-      break;
+      break;*/
     }
     println(c);
   }
@@ -158,7 +166,6 @@ public class GameplayScreen extends Screen{
       {
          max = checkCol(b.shape, j) ? j : max;
       }
-      debug = "MAX:" + (int)(b.xpos + max);
       if(b.xpos + max  < 10)
       {
         canMove = true;
@@ -170,8 +177,6 @@ public class GameplayScreen extends Screen{
       {
          max = checkCol(b.shape, j) ? j : max;
       }
-      debug = "MAX:" + (int)(b.xpos + max);
-      
       if(b.xpos + max -2 > -1)
       {
         canMove = true;
@@ -182,9 +187,6 @@ public class GameplayScreen extends Screen{
   public boolean checkCol(int[][] shape, int col)
   {
     boolean contains = false;
-    
-    
-    
     for(int[] tmp : shape)
     {
        contains = tmp[col]>=1?true:contains; 
